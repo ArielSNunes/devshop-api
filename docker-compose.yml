@@ -1,4 +1,4 @@
-version: "3.1"
+version: '3.1'
 services:
   db:
     image: postgres
@@ -9,3 +9,21 @@ services:
       - .docker/db:/var/lib/postgresql/data
     ports:
       - 5432:5432
+    networks:
+      - postgres-compose-network
+  pgadmin:
+    image: dpage/pgadmin4
+    env_file:
+      - .env
+    ports:
+      - 4444:80
+    depends_on:
+      - db
+    networks:
+      - postgres-compose-network
+    volumes:
+      - .docker/pgadmin:/var/lib/pgadmin
+
+networks: 
+  postgres-compose-network:
+    driver: bridge
