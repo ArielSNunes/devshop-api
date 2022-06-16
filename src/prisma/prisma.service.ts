@@ -8,12 +8,11 @@ export class PrismaService
 	implements OnModuleInit, OnModuleDestroy
 {
 	constructor(private readonly configService: ConfigService) {
-		const logLevel =
-			configService.get('APP_ENV') === 'DEV'
-				? ['query', 'info', 'warn', 'error']
-				: ['error']
 		super({
-			log: logLevel,
+			log:
+				configService.get('APP_ENV') === 'DEV'
+					? ['query', 'info', 'warn', 'error']
+					: ['error'],
 		})
 	}
 	async onModuleInit() {

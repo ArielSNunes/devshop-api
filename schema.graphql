@@ -2,11 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Category {
+type CategoryPublic {
   id: String
   name: String
+  slug: String
 }
 
 type Query {
-  getAllCategories: [Category!]!
+  getAllCategories: [CategoryPublic!]!
 }

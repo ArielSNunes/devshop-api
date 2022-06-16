@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common'
-import { Category } from './dto/category.gql'
+import { Category } from '@prisma/client'
+import { PrismaService } from 'src/prisma/prisma.service'
 
 @Injectable()
 export class CategoriesService {
+	constructor(private readonly prismaService: PrismaService) {}
 	async findAll(): Promise<Category[]> {
-		return [{ id: '1', name: 'teste' }]
+		return await this.prismaService.category.findMany()
 	}
 }
