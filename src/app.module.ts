@@ -1,7 +1,20 @@
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
+import { GraphQLModule } from '@nestjs/graphql'
+import { CategoriesModule } from './categories/categories.module'
 
 @Module({
-	imports: [],
+	imports: [
+		ConfigModule.forRoot({
+			isGlobal: true,
+		}),
+		GraphQLModule.forRoot<ApolloDriverConfig>({
+			autoSchemaFile: 'schema.graphql',
+			driver: ApolloDriver,
+		}),
+		CategoriesModule,
+	],
 	controllers: [],
 	providers: [],
 })
