@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Category {
-  id   String @id @default(uuid())
+  id   String @id @default(uuid()) @db.Uuid
   name String @db.VarChar(250)
   slug String @db.VarChar(250)
 
