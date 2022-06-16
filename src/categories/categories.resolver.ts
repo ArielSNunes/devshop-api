@@ -1,5 +1,4 @@
 import { Query, Resolver } from '@nestjs/graphql'
-import { Category } from '@prisma/client'
 import { CategoriesService } from './categories.service'
 import { CategoryPublic } from './dto/category.gql'
 
@@ -7,7 +6,7 @@ import { CategoryPublic } from './dto/category.gql'
 export class CategoriesResolver {
 	constructor(private readonly categoryService: CategoriesService) {}
 	@Query(returns => [CategoryPublic], { name: 'getAllCategories' })
-	async getAllCategories(): Promise<Category[]> {
+	async getAllCategories(): Promise<CategoryPublic[]> {
 		return await this.categoryService.findAll()
 	}
 }
