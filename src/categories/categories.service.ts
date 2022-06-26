@@ -26,4 +26,23 @@ export class CategoriesService {
 			data: input,
 		})
 	}
+	async findById(id: string) {
+		return await this.prismaService.category.findFirst({
+			where: { id },
+		})
+	}
+	async delete(id: string): Promise<boolean> {
+		const cat = await this.findById(id)
+		if (!cat) {
+			return true
+		}
+		try {
+			await this.prismaService.category.delete({
+				where: { id },
+			})
+			return true
+		} catch (error) {
+			return false
+		}
+	}
 }

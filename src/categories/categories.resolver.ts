@@ -1,3 +1,4 @@
+import { ParseUUIDPipe } from '@nestjs/common'
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { CategoryMapper } from './categories.mapper'
 import { CategoriesService } from './categories.service'
@@ -18,5 +19,12 @@ export class CategoriesResolver {
 		@Args('input') input: CategoryCreateInput,
 	): Promise<CategoryPublic> {
 		return await this.categoryService.create(CategoryMapper.toEntity(input))
+	}
+
+	@Mutation(returns => Boolean, { name: 'deleteCategory' })
+	async deleteCategory(
+		@Args('id', ParseUUIDPipe) id: string,
+	): Promise<boolean> {
+		return await this.categoryService.delete(id)
 	}
 }
