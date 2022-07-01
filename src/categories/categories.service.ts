@@ -1,7 +1,12 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common'
+import {
+	BadRequestException,
+	Injectable,
+	UnprocessableEntityException,
+} from '@nestjs/common'
 import { Category } from '@prisma/client'
 import { PrismaService } from 'src/prisma/prisma.service'
 import { CategoryCreateInput } from './dto/category-create.input'
+import { CategoryUpdateInput } from './dto/category-update.input'
 
 @Injectable()
 export class CategoriesService {
@@ -44,5 +49,15 @@ export class CategoriesService {
 		} catch (error) {
 			return false
 		}
+	}
+	async update(id: string, input: Omit<CategoryUpdateInput, 'id'>) {
+		const cat = await this.findById(id)
+		if (!cat) {
+			throw new BadRequestException('Categoria não identificada')
+		}
+		return await this.prismaService.category.update({
+			where: { id: id },
+			data: { ...input },
+		})
 	}
 }
