@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { CategoriesModule } from './categories/categories.module'
+import { ProductsModule } from './products/products.module'
 
 @Module({
 	imports: [
@@ -14,6 +15,7 @@ import { CategoriesModule } from './categories/categories.module'
 			driver: ApolloDriver,
 		}),
 		CategoriesModule,
+		ProductsModule,
 	],
 	controllers: [],
 	providers: [],

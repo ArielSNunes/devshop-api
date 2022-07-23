@@ -8,15 +8,25 @@ type Category {
   slug: String
 }
 
+type Product {
+  id: String
+  name: String
+  description: String
+  slug: String
+  category: Category!
+}
+
 type Query {
   getAllCategories: [Category!]!
   getCategoryById(id: String!): Category!
+  getAllProducts: [Product!]!
 }
 
 type Mutation {
   createCategory(input: CategoryCreateInput!): Category!
   updateCategory(input: CategoryUpdateInput!): Category!
   deleteCategory(id: String!): Boolean!
+  createProduct(input: ProductCreateInput!): Product!
 }
 
 input CategoryCreateInput {
@@ -28,4 +38,11 @@ input CategoryUpdateInput {
   id: String!
   name: String!
   slug: String!
+}
+
+input ProductCreateInput {
+  name: String!
+  description: String!
+  slug: String!
+  categoryId: String!
 }
