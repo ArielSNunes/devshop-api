@@ -22,7 +22,7 @@ npx prisma migrate dev
 npx prisma migrate deploy
 
 # to create a new migration after creating the models in schema.prisma file
-npx prisma migrate --name <migration name>
+npx prisma migrate dev --name <migration name>
 ```
 
 ## Running the app
