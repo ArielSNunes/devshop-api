@@ -20,6 +20,7 @@ type Query {
   getAllCategories: [Category!]!
   getCategoryById(id: String!): Category!
   getAllProducts: [Product!]!
+  getProductById(id: String!): Product!
 }
 
 type Mutation {
@@ -27,6 +28,8 @@ type Mutation {
   updateCategory(input: CategoryUpdateInput!): Category!
   deleteCategory(id: String!): Boolean!
   createProduct(input: ProductCreateInput!): Product!
+  updateProduct(input: ProductUpdateInput!): Product!
+  deleteProduct(id: String!): Boolean!
 }
 
 input CategoryCreateInput {
@@ -45,4 +48,12 @@ input ProductCreateInput {
   description: String!
   slug: String!
   categoryId: String!
+}
+
+input ProductUpdateInput {
+  id: String!
+  name: String
+  slug: String
+  descripton: String
+  categoryId: String
 }
