@@ -54,6 +54,6 @@ input ProductUpdateInput {
   id: String!
   name: String
   slug: String
-  descripton: String
+  description: String
   categoryId: String
 }
