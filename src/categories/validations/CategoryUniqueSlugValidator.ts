@@ -4,6 +4,7 @@ import {
 	ValidatorConstraintInterface,
 } from 'class-validator'
 import { CategoriesService } from '../categories.service'
+import { CategoryUpdateInput } from '../dto/category-update.input'
 
 @ValidatorConstraint({ async: true, name: 'CategoryUniqueSlug' })
 export class CategoryUniqueSlugValidator
@@ -16,7 +17,16 @@ export class CategoryUniqueSlugValidator
 		validationArguments?: ValidationArguments,
 	): Promise<boolean> {
 		const slug = await this.categoryService.findBySlug(value)
-		return !slug
+		if (!slug) {
+			return true
+		}
+
+		const { id } = validationArguments.object as CategoryUpdateInput
+
+		if (!id) {
+			return true
+		}
+		return slug.id === id
 	}
 
 	defaultMessage?(validationArguments?: ValidationArguments): string {
