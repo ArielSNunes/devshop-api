@@ -56,4 +56,12 @@ export class ProductsService {
 			return false
 		}
 	}
+
+	async findBySlug(slug: string) {
+		return await this.prismaService.product.findFirst({
+			where: {
+				slug,
+			},
+		})
+	}
 }
